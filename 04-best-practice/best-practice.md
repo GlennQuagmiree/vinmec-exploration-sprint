@@ -1,8 +1,10 @@
 # 3 Best Practice Quốc tế — Đặt lịch hẹn Y tế Real-time
 
+> ⚠️ **Giới hạn:** Trong lúc làm bài không tra cứu được nguồn web, các mô tả dưới đây dựa trên kiến thức chung về 3 hệ thống này (cutoff 01/2026). Tập trung vào **cơ chế vận hành** (real-time booking, hard-lock slot, two-way sync) — những điểm có thể xác minh trên trang chính thức của Epic/NHS/Zocdoc. Không đưa số liệu hiệu quả cụ thể vì không kiểm chứng được.
+
 ## Tổng quan
 
-Nghiên cứu 3 hệ thống đặt lịch hẹn y tế hàng đầu thế giới để rút ra bài học cho Vinmec MyVinmec. Tập trung vào cơ chế **real-time booking** (đặt lịch tức thì không cần chờ xác nhận), **AI triage** (phân loại bệnh nhân thông minh), và **two-way sync** (đồng bộ 2 chiều giữa các kênh).
+Nghiên cứu 3 hệ thống đặt lịch hẹn y tế có cơ chế liên quan để rút ra bài học cho Vinmec MyVinmec. Tập trung vào cơ chế **real-time booking** (đặt lịch tức thì không cần chờ xác nhận), **AI triage** (phân loại bệnh nhân thông minh), và **two-way sync** (đồng bộ 2 chiều giữa các kênh).
 
 ---
 
@@ -28,16 +30,8 @@ Nghiên cứu 3 hệ thống đặt lịch hẹn y tế hàng đầu thế giớ
    - Gửi email/SMS nhắc trước 24 giờ
    - Bệnh nhân có thể tự đổi/hủy lịch trên app (nếu còn > 24 giờ)
 
-### Kết quả đo được
-
-- **71% bệnh nhân** đặt lịch qua app thay vì gọi điện thoại (theo báo cáo Epic 2023)
-- Giảm **40% cuộc gọi tổng đài** (ước tính từ Kaiser Permanente case study)
-- **95% slot** được xác nhận tức thì, không cần human intervention
-
 ### Nguồn
 - Epic MyChart official website: [epic.com/software/mychart](https://www.epic.com/software/mychart/)
-- Case study: Kaiser Permanente MyChart adoption (2022-2023)
-- Thống kê công khai của Epic về self-scheduling trends
 
 ---
 
@@ -68,16 +62,9 @@ Nghiên cứu 3 hệ thống đặt lịch hẹn y tế hàng đầu thế giớ
    - Hiển thị slot trống của GP/chuyên khoa trong vòng 10 dặm (16 km)
    - Bệnh nhân chọn → xác nhận ngay
 
-### Kết quả đo được
-
-- Giảm **30% cuộc gọi không cần thiết** đến tổng đài 111 (theo NHS Digital Report 2023)
-- **85% trường hợp** AI phân loại đúng độ ưu tiên (so với đánh giá của y tá triage)
-- **4.2 triệu lượt** dùng AI triage mỗi tháng (tính đến 2024)
-
 ### Nguồn
 - NHS App official page: [nhs.uk/nhs-app](https://www.nhs.uk/nhs-app/)
 - NHS 111 Online triage system: [111.nhs.uk](https://111.nhs.uk/)
-- NHS Digital Annual Report 2023-2024
 
 ---
 
@@ -106,16 +93,8 @@ Nghiên cứu 3 hệ thống đặt lịch hẹn y tế hàng đầu thế giớ
      - Đề xuất 3 slot thay thế gần nhất
      - Bệnh nhân chọn lại ngay trên app
 
-### Kết quả đo được
-
-- **92% bệnh nhân** đánh giá trải nghiệm đặt lịch là "rất hài lòng" (Zocdoc Patient Survey 2023)
-- Tỷ lệ **no-show giảm 25%** (nhờ nhắc lịch tự động + dễ đổi lịch)
-- **99.7% sync success rate** — lịch đặt từ mọi kênh đều xuất hiện đúng trên app trong 30 giây
-
 ### Nguồn
 - Zocdoc official website: [zocdoc.com/about/how-it-works](https://www.zocdoc.com/about/how-it-works/)
-- Zocdoc Annual Patient Experience Report 2023
-- Case study: Zocdoc integration with Epic EHR (2022)
 
 ---
 
@@ -186,9 +165,9 @@ Nghiên cứu 3 hệ thống đặt lịch hẹn y tế hàng đầu thế giớ
 
 | **Best Practice** | **Cơ chế chính** | **Kết quả** | **Áp dụng cho Vinmec** |
 |---|---|---|---|
-| **Epic MyChart** | Real-time booking, hard-lock slot | 95% xác nhận tức thì, giảm 40% cuộc gọi tổng đài | Đồng bộ slot thật từ HIS, xác nhận ngay không cần tổng đài |
-| **NHS App** | AI triage, phân loại độ ưu tiên | Giảm 30% cuộc gọi không cần thiết, 85% phân loại đúng | AI gợi ý chuyên khoa + disclaimer rõ ràng |
-| **Zocdoc** | Two-way sync mọi kênh trong 30s | 99.7% sync success rate, giảm 25% no-show | Lịch đặt qua hotline/quầy lễ tân tự động sync lên app |
+| **Epic MyChart** | Real-time booking, hard-lock slot | Xác nhận tức thì, không cần tổng đài | Đồng bộ slot thật từ HIS, xác nhận ngay không cần tổng đài |
+| **NHS App** | AI triage, phân loại độ ưu tiên | Giảm cuộc gọi không cần thiết | AI gợi ý chuyên khoa + disclaimer rõ ràng |
+| **Zocdoc** | Two-way sync mọi kênh trong < 1 phút | Lịch từ mọi kênh đều sync lên app | Lịch đặt qua hotline/quầy lễ tân tự động sync lên app |
 
 **Nguyên tắc chung:**
 1. **Real-time > Pending:** Xác nhận tức thì tốt hơn "chờ xác nhận"
@@ -197,8 +176,3 @@ Nghiên cứu 3 hệ thống đặt lịch hẹn y tế hàng đầu thế giớ
 
 ---
 
-## Ghi Chú
-
-- **Phương pháp nghiên cứu:** Do không truy cập được web trong thời gian làm bài (WebSearch tool lỗi API), bài viết dựa trên kiến thức về các hệ thống này từ training data (knowledge cutoff tháng 1/2026). Các con số (71%, 30%, 92%…) là ước tính từ báo cáo công khai của các tổ chức này.
-- **Nguồn chính thức:** Mọi website được liệt kê (epic.com, nhs.uk, zocdoc.com) là trang chính thức của tổ chức, có thể verify sau khi có kết nối web.
-- **Không phải phỏng vấn chuyên gia:** Bài viết không dựa trên phỏng vấn nhân viên Epic/NHS/Zocdoc, chỉ tổng hợp thông tin công khai.

@@ -74,7 +74,13 @@ export default function ChatPage() {
           ← Quay lại
         </button>
         <h1 className="font-semibold">Tư vấn chuyên khoa</h1>
-        <div className="w-16" />
+        <a
+          href="tel:115"
+          className="flex items-center gap-1 px-3 py-1.5 bg-[#DC2626] hover:bg-[#B91C1C] text-white text-xs font-semibold rounded-lg"
+          title="Gọi cấp cứu 115"
+        >
+          ⚠️ 115
+        </a>
       </header>
 
       {showDisclaimer && (

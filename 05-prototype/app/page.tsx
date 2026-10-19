@@ -7,10 +7,23 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#0F172A] text-[#F8FAFC]">
       <div className="max-w-md mx-auto px-4 py-6">
-        <header className="mb-8">
+        <header className="mb-6">
           <h1 className="text-2xl font-semibold mb-2">Vinmec</h1>
           <p className="text-[#94A3B8] text-sm">Đặt lịch tức thì</p>
         </header>
+
+        {/* Disclaimer Banner: Prototype MOCK */}
+        <div className="mb-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+          <div className="flex items-start gap-3">
+            <span className="text-amber-400 text-lg leading-none mt-0.5">⚠️</span>
+            <div className="text-xs text-amber-200/90 leading-relaxed">
+              <strong className="block text-amber-300 font-semibold mb-1 uppercase tracking-wide">
+                ĐÂY LÀ PROTOTYPE MOCK
+              </strong>
+              Dữ liệu slot trong demo này là giả lập, không phản ánh lịch thật của bác sĩ. Hệ thống thật cần tích hợp API từ HIS.
+            </div>
+          </div>
+        </div>
 
         <div className="space-y-4">
           <Link

@@ -308,6 +308,50 @@ button:disabled {
   .timeline { flex-direction: column; gap: 1rem; }
   .journey-step { flex-direction: column; }
 }
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 8mm;
+  }
+  html, body {
+    height: auto !important;
+    background: #0B0E14 !important;
+    color: #F8FAFC !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    font-size: 13px !important;
+  }
+  .deck {
+    height: auto !important;
+    max-width: 100% !important;
+    display: block !important;
+  }
+  .slide-container {
+    display: block !important;
+    padding: 0 !important;
+    height: auto !important;
+  }
+  .slide {
+    display: block !important;
+    page-break-after: always !important;
+    page-break-inside: avoid !important;
+    break-after: page !important;
+    break-inside: avoid !important;
+    height: 190mm !important;
+    max-height: 190mm !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    padding: 0.5rem 0 !important;
+  }
+  .slide:last-of-type {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+  .controls {
+    display: none !important;
+  }
+}
 </style>
 
 <div class="deck">
@@ -347,7 +391,7 @@ button:disabled {
         <div class="card">
           <h3>Bằng chứng từ người dùng</h3>
           <ul>
-            <li>20+ review 1-2 sao về đặt lịch</li>
+            <li>9 review trích dẫn về đặt lịch (5 nhóm pain point)</li>
             <li>Pattern lặp lại: "chờ tổng đài gọi lại"</li>
             <li>Lịch đặt qua tổng đài không hiện trên app</li>
           </ul>
@@ -370,24 +414,22 @@ button:disabled {
         <div class="card">
           <h3>Secondary Research</h3>
           <ul>
-            <li>Phân tích 50+ review App Store/Google Play</li>
+            <li>Phân tích review App Store/Google Play</li>
             <li>Pattern matching điểm đau lặp lại</li>
             <li>UI copywriting analysis</li>
             <li>FAQ và release notes</li>
           </ul>
         </div>
         <div class="card">
-          <h3>Primary Research</h3>
+          <h3>Research & Evidence</h3>
           <ul>
-            <li>3 phỏng vấn ẩn danh (P1-P3)</li>
-            <li>Bạn bè/người thân từng đi khám</li>
-            <li>Không hỏi bệnh án (chỉ trải nghiệm dịch vụ)</li>
-            <li>Xin đồng ý trước khi phỏng vấn</li>
+            <li>Secondary: 50+ review công khai App Store/Google Play (người dùng thật)</li>
+            <li>Synthetic: 3 phỏng vấn mô phỏng dựng lại từ review để đào sâu pain point</li>
           </ul>
         </div>
       </div>
       <div class="card" style="margin-top: 1rem; background: var(--card-bg); border-left: 3px solid var(--accent);">
-        <p><strong>Lưu ý:</strong> Do không có quyền tiếp cận bệnh nhân Vinmec, nghiên cứu chủ yếu dựa trên review công khai và phỏng vấn người thân.</p>
+        <p><strong>Lưu ý về evidence:</strong> Review công khai là bằng chứng từ người dùng thật. P1–P3 và log test prototype là mô phỏng do AI tạo để minh họa bài toán.</p>
       </div>
     </div>
 
@@ -452,14 +494,14 @@ button:disabled {
     <div class="slide">
       <h2>Need Statement</h2>
       <div class="card" style="background: var(--card-bg); padding: 2rem; border-left: 4px solid var(--accent);">
-        <p style="font-size: 1.25rem; font-weight: 600; line-height: 1.6; max-width: none;">
-          Người dùng MyVinmec <span style="color: var(--accent);">cần biết chắc chắn lịch hẹn có được xác nhận ngay không</span> để <span style="color: var(--warn);">sắp xếp công việc và không lo lỡ lịch</span>.
+        <p style="font-size: 1.15rem; font-weight: 600; line-height: 1.6; max-width: none;">
+          Cách để <span style="color: var(--accent);">giảm thời gian chờ xác nhận lịch hẹn xuống dưới 5 phút</span> cho <strong>bệnh nhân Vinmec muốn đặt lịch khám</strong> khi hiện <span style="color: var(--warn);">phải chờ xác nhận thủ công (từ vài giờ đến 1 ngày)</span> để biết lịch có hợp lệ hay không.
         </p>
       </div>
       <div class="grid grid-2" style="margin-top: 2rem;">
         <div class="card">
           <h3>Population</h3>
-          <p>Người dùng MyVinmec (tầng lớp trung lưu/khá giả, 25-45 tuổi, đi làm văn phòng)</p>
+          <p>Bệnh nhân Vinmec muốn đặt lịch khám (cần chủ động sắp xếp thời gian)</p>
         </div>
         <div class="card">
           <h3>Need</h3>
@@ -490,7 +532,7 @@ button:disabled {
       <div class="card" style="margin-bottom: 1rem;">
         <h3>2. AI Triage — NHS 111 Online</h3>
         <p><strong>Cơ chế:</strong> Người dùng nhập triệu chứng → AI gợi ý chuyên khoa/độ ưu tiên</p>
-        <p><strong>Kết quả:</strong> Giảm 30% lượt gọi tổng đài, tăng độ chính xác chuyên khoa</p>
+        <p><strong>Kết quả:</strong> Giúp hệ thống phân loại chính xác hơn, giảm áp lực tổng đài</p>
       </div>
       <div class="card">
         <h3>3. Two-way Sync — ZocDoc</h3>
@@ -528,9 +570,10 @@ button:disabled {
       </div>
       <div class="grid grid-2" style="margin-top: 1rem;">
         <div class="card">
-          <h3>Test với 2 người</h3>
-          <p>P1 (28 tuổi): "Rất nhanh, thích hơn phải chờ điện thoại"</p>
-          <p>P2 (35 tuổi): "Nhưng không chắc lịch có thật không"</p>
+          <h3>Mô phỏng 2 kịch bản (P4, P5)</h3>
+          <p>P4 (32 tuổi, mẹ 2 con): Luồng mượt, an tâm với số chỗ hiển thị rõ</p>
+          <p>P5 (45 tuổi, mãn tính): Nhận diện rõ giá trị đồng bộ và mã QR</p>
+          <p style="font-size: 0.75rem; opacity: 0.7; margin-top: 0.5rem;"><em>*Log mô phỏng do AI tạo để minh họa flow, không phải test người thật</em></p>
         </div>
         <div class="card">
           <h3>Tech stack</h3>

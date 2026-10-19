@@ -36,7 +36,7 @@ Tìm hiểu trải nghiệm thực tế của người dùng khi đặt lịch k
 **1. Anh/chị có thể chia sẻ sơ qua về việc sử dụng dịch vụ khám bệnh tại Vinmec không ạ?**  
    - Đi khám tại Vinmec bao lâu rồi?
    - Thường đi khám cho ai? (bản thân / con cái / người thân)
-   - Tần suất đi khám? (định kỳ / khi có vấn đề sức khỏe)
+   - Tần suất đặt lịch khám? (định kỳ / khi cần đặt lịch gấp / khi cần tư vấn)
 
 ### Phần 2: Trải nghiệm đặt lịch gần nhất
 

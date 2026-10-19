@@ -43,8 +43,8 @@ export default function ConfirmedPage() {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-[#14B8A6]/20 rounded-full mb-4">
             <span className="text-3xl">✓</span>
           </div>
-          <h2 className="text-2xl font-semibold mb-2">Đã xác nhận</h2>
-          <p className="text-[#94A3B8]">Lịch khám của bạn đã được xác nhận tức thì</p>
+          <h2 className="text-2xl font-semibold mb-2">Đã xác nhận (Demo)</h2>
+          <p className="text-[#94A3B8]">Lịch khám của bạn đã được ghi nhận tức thì trên bản mẫu</p>
         </div>
 
         <div className="bg-[#1E293B] rounded-lg border border-[#334155] p-6 mb-6">
@@ -88,7 +88,7 @@ export default function ConfirmedPage() {
           <div className="flex items-start gap-2">
             <span className="text-[#14B8A6]">✓</span>
             <div className="text-sm text-[#94A3B8] leading-relaxed">
-              Lịch hẹn này đã được đồng bộ tức thì. Bạn có thể xem lại trong mục "Lịch hẹn của tôi".
+              Lịch hẹn này đã được đồng bộ vào bộ nhớ demo (localStorage). Trong hệ thống thật, trạng thái sẽ được đồng bộ hai chiều trực tiếp với HIS.
             </div>
           </div>
         </div>

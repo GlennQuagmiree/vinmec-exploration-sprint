@@ -119,6 +119,14 @@ Không gọi API thật, chỉ keyword matching `toLowerCase()` + `includes()`.
 2. **Disclaimer rõ ràng:** Banner màu cam ⚠️ ở đầu chat, có thể tắt.
 3. **Ẩn danh:** Mock data không dùng tên thật, chỉ "P4", "P5" trong log test.
 
+## Lưu ý quan trọng về hard-lock slot
+
+- **Prototype chỉ là UI mock, không có backend thật:** Toàn bộ trạng thái đặt chỗ được lưu trong `localStorage` và mock API route (`/api/mock-slots`), không có cơ sở dữ liệu production kết nối trực tiếp với bệnh viện.
+- **Slot "còn X chỗ" là giả lập, cần tích hợp HIS API:** Để triển khai thực tế, Vinmec cần mở kết nối hai chiều qua API cổng HIS (Hospital Information System) để kiểm tra và khóa slot thực tế.
+- **Cần xử lý edge case: bác sĩ bận đột xuất:**
+  - *Khác biệt cốt lõi so với rạp chiếu phim (CGV):* Vé xem phim là ghế cố định, không thay đổi; trong khi bác sĩ là con người có thể phát sinh ca mổ cấp cứu đột xuất, hội chẩn khẩn cấp.
+  - *Giải pháp thực tế:* Cần xây dựng luồng exception handling: tự động đề xuất đổi bác sĩ tương đương cùng chuyên khoa hoặc chuyển khung giờ ưu tiên kèm thông báo tức thì cho bệnh nhân.
+
 ## Commit Attribution
 
 ```

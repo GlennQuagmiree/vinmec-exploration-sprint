@@ -2,12 +2,14 @@
 
 ## Need Statement (Biodesign Framework)
 
-> **Cách để giảm thời gian chờ xác nhận lịch hẹn xuống dưới 5 phút cho bệnh nhân Vinmec muốn đặt lịch khám qua MyVinmec app nhưng hiện phải chờ tổng đài gọi lại (từ vài giờ đến 1 ngày) để xác nhận lịch có hợp lệ hay không.**
+> **Cách để giảm thời gian chờ xác nhận lịch hẹn xuống dưới 5 phút cho bệnh nhân Vinmec muốn đặt lịch khám nhưng không biết lịch đã được xác nhận hay chưa (hiện phải chờ xác nhận thủ công từ vài giờ đến 1 ngày để biết lịch có hợp lệ hay không).**[^1]
+
+[^1]: Con số "5 phút" là ngưỡng thiết kế, suy ra từ benchmark ngành (các hệ thống booking y tế hiện đại xác nhận tức thì) và kỳ vọng người dùng về thời gian chờ trong 1 session app. Đây là giả định thiết kế, chưa kiểm chứng bằng nghiên cứu định lượng.
 
 ### Cấu trúc theo Biodesign
 
-- **Problem (Vấn đề):** Phải chờ tổng đài gọi lại (từ vài giờ đến 1 ngày) để xác nhận lịch có hợp lệ hay không
-- **Population (Nhóm người dùng):** Bệnh nhân Vinmec muốn đặt lịch khám qua MyVinmec app
+- **Problem (Vấn đề):** Phải chờ xác nhận thủ công (từ vài giờ đến 1 ngày) để biết lịch có hợp lệ hay không
+- **Population (Nhóm người dùng):** Bệnh nhân Vinmec muốn đặt lịch khám
 - **Outcome (Kết quả mong muốn):** Giảm thời gian chờ xác nhận lịch hẹn xuống dưới 5 phút
 
 ---
@@ -27,13 +29,13 @@
 ### Tại sao target outcome là "dưới 5 phút"?
 
 - **Baseline hiện tại:** Vài giờ đến 1 ngày (review evidence: "hôm sau vẫn có bạn tổng đài gọi lại")
-- **Benchmark ngành:** Các hệ thống booking y tế hiện đại (ZocDoc, Practo, Docplanner) xác nhận tức thì (< 1 phút)
-- **Ngưỡng chấp nhận được:** 5 phút là thời gian tối đa người dùng sẵn sàng chờ trong 1 session app (theo UX research, 5 phút là ngưỡng "acceptable wait time" cho critical task)
+- **Benchmark ngành:** Các hệ thống booking y tế hiện đại (ZocDoc, Practo, Docplanner) xác nhận tức thì (< 1 phút) — *quan sát từ sản phẩm, không phải số liệu đo*
+- **Ngưỡng chấp nhận được:** 5 phút là thời gian tối đa người dùng sẵn sàng chờ trong 1 session app — *đây là giả định thiết kế của nhóm, không dẫn từ nghiên cứu nào*
 
 ### Tại sao nhóm population này?
 
 - **Phạm vi:** Bệnh nhân Vinmec (không phải bệnh viện khác) vì pain point này đặc thù với hệ thống HIS của Vinmec
-- **Kênh:** Đặt lịch qua MyVinmec app (không phải hotline, website, hoặc đến viện trực tiếp) vì đây là kênh digital có tiềm năng tự động hóa cao nhất
+- **Kênh:** Không giới hạn kênh cụ thể (app, hotline, website, hoặc đến viện trực tiếp) — pain point tồn tại ở tất cả các kênh khi cần xác nhận lịch
 - **Hành vi:** "Muốn đặt lịch khám" → có động cơ chủ động, không phải emergency (emergency sẽ đến viện trực tiếp, không đặt lịch trước)
 
 ---
@@ -119,15 +121,17 @@ Một số hướng giải pháp tiềm năng (sẽ khám phá ở bước sau):
 
 ## Định lượng Impact
 
+> ⚠️ **Ước tính thô từ giả định — chưa kiểm chứng.** Các con số dưới đây được suy ra từ giả định về quy mô người dùng (không có số liệu nội bộ Vinmec), chỉ nhằm minh họa bậc độ lớn của vấn đề. Cần thay bằng số liệu vận hành thật của Vinmec trước khi dùng để ra quyết định.
+
 ### Số lượng người dùng ảnh hưởng (ước tính)
 
 - **MyVinmec app installs:** ~500,000+ (Google Play hiển thị "500K+ downloads")
-- **Monthly active users (MAU):** ~100,000 (giả định 20% install base)
-- **Appointment booking rate:** ~30% (30,000 booking requests/tháng)
+- **Monthly active users (MAU):** ~100,000 *(giả định 20% install base — không có nguồn)*
+- **Appointment booking rate:** ~30% *(giả định — không có nguồn)* → 30,000 booking requests/tháng
 
-→ **Impact:** 30,000 lượt đặt lịch/tháng hiện đang phải chờ tổng đài xác nhận
+→ **Impact (ước tính):** 30,000 lượt đặt lịch/tháng hiện đang phải chờ tổng đài xác nhận
 
-### Tác động lên doanh nghiệp
+### Tác động lên doanh nghiệp (ước tính)
 
 1. **Chi phí tổng đài:** Giả sử mỗi cuộc gọi xác nhận mất 5 phút, tổng đài làm việc 8 giờ/ngày
    - 30,000 cuộc gọi/tháng × 5 phút = 150,000 phút = 2,500 giờ = ~312 ngày nhân công
@@ -135,7 +139,7 @@ Một số hướng giải pháp tiềm năng (sẽ khám phá ở bước sau):
 
 2. **Tỷ lệ chuyển đổi (conversion rate):** Người dùng bỏ cuộc khi phải chờ lâu → mất doanh thu
    - Giả sử 10% drop-off do chờ quá lâu = 3,000 lượt khám/tháng
-   - Chi phí khám trung bình 1,000,000 VNĐ → mất 3 tỷ VNĐ doanh thu/tháng
+   - Chi phí khám trung bình 1,000,000 VNĐ → mất 3 tỷ VNĐ doanh thu/tháng *(đây là phép nhân từ hai giả định, không phải số đo)*
 
 3. **Danh tiếng thương hiệu:** Review 1-3 sao ảnh hưởng đến quyết định tải app của người dùng mới
 
@@ -143,13 +147,12 @@ Một số hướng giải pháp tiềm năng (sẽ khám phá ở bước sau):
 
 ## Kết luận
 
-Need statement này tập trung vào **outcome đo lường được** (thời gian chờ < 5 phút), **nhóm người dùng cụ thể** (bệnh nhân đặt lịch qua app), và **problem rõ ràng** (phải chờ tổng đài xác nhận), tuân thủ framework Biodesign: **không nêu giải pháp**, chỉ định nghĩa vấn đề cần giải quyết.
+Need statement này tập trung vào **outcome đo lường được** (thời gian chờ < 5 phút), **nhóm người dùng cụ thể** (bệnh nhân Vinmec muốn đặt lịch khám), và **problem rõ ràng** (phải chờ xác nhận thủ công), tuân thủ framework Biodesign: **không nêu giải pháp**, chỉ định nghĩa vấn đề cần giải quyết.
 
 ---
 
 ## Metadata
 
-- **Tác giả:** Claude (AI)
 - **Ngày tạo:** 2026-10-19
 - **Phương pháp:** Phân tích secondary research (App Store/Google Play reviews)
 - **Framework:** Biodesign Need Statement (Stanford Biodesign)

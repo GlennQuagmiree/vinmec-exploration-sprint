@@ -1,12 +1,14 @@
-# Log thử nghiệm prototype (2 người)
+# Log mô phỏng prototype (2 kịch bản)
 
-Ngày thử: 18/10/2026  
-Địa điểm: Vinmec Times City (sảnh), qua điện thoại  
-Phương pháp: Think-aloud, không ghi âm, không hỏi chẩn đoán
+> **LƯU Ý QUAN TRỌNG:** Đây là log MÔ PHỎNG do AI tạo để minh họa flow prototype. KHÔNG PHẢI kết quả test với người dùng thật. Lý do: giới hạn thời gian (sprint 6 giờ) và không tiếp cận được người dùng thật của Vinmec trong điều kiện làm bài. Đây là hạn chế được ghi nhận trong bài.
+>
+> **Phương pháp:** Walkthrough theo kịch bản (scenario walkthrough) — mô phỏng hành vi để kiểm tra xem prototype có xử lý được các pain point ghi nhận từ 50+ review công khai hay không.
+>
+> **Hạn chế:** Vì không có buổi test với người thật, feedback trong log này là kịch bản mô phỏng dựa trên pattern từ review.
 
 ---
 
-## Người thử P4 — Nữ, 32 tuổi, mẹ 2 con (khám Nhi, Sản)
+## Kịch bản P4 — Nữ, 32 tuổi, mẹ 2 con (khám Nhi, Sản)
 
 | Mục | Nội dung |
 |-----|----------|
@@ -19,7 +21,7 @@ Phương pháp: Think-aloud, không ghi âm, không hỏi chẩn đoán
 
 ---
 
-## Người thử P5 — Nam, 45 tuổi, điều trị mãn tính (Khám Nội tổng quát)
+## Kịch bản P5 — Nam, 45 tuổi, điều trị mãn tính (Khám Nội tổng quát)
 
 | Mục | Nội dung |
 |-----|----------|
@@ -40,7 +42,7 @@ Phương pháp: Think-aloud, không ghi âm, không hỏi chẩn đoán
 | 2 | Slot "Hết chỗ" mờ | ✅ Đã sửa (tăng rõ ràng) |
 | 3 | Note sync trong "Lịch hẹn" chưa đủ nhấn | ✅ Đã thêm banner teal "Mọi lịch đều sync ngay" |
 
-**Kết luận chung:** Cả 2 người đều nhận ra khác biệt luồng mới vs cũ (nút So sánh). Không ai hiểu nhầm AI đang chẩn đoán — đều đọc là "gợi ý chuyên khoa". Pain point pending + sync đều được cảm nhận là đã giải quyết.
+**Kết luận chung:** Cả 2 kịch bản walkthrough đều cho thấy sự khác biệt rõ rệt giữa luồng mới vs cũ (nút So sánh). Kịch bản mô phỏng không ghi nhận sự nhầm lẫn AI đang chẩn đoán bệnh — đều hiểu là "gợi ý chuyên khoa". Điểm đau về chờ xác nhận thủ công và đồng bộ đa kênh đều được xử lý triệt để trong flow thiết kế.
 
 **Hạn chế & tiếp theo:**
 - Test n=2, chưa đủ đại diện (chưa có người lớn tuổi ít dùng app).

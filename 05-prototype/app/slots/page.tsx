@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 
 const MOCK_SLOTS = {
   'Tiêu hóa': [
@@ -24,13 +24,36 @@ const MOCK_SLOTS = {
   ],
 };
 
-export default function SlotsPage() {
+function SlotsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const specialty = searchParams.get('specialty') || 'Nội tổng quát';
-  const slots = MOCK_SLOTS[specialty as keyof typeof MOCK_SLOTS] || MOCK_SLOTS['Nội tổng quát'];
+  const initialSlots = MOCK_SLOTS[specialty as keyof typeof MOCK_SLOTS] || MOCK_SLOTS['Nội tổng quát'];
 
+  const [slots, setSlots] = useState(initialSlots);
+  const [isLoadingApi, setIsLoadingApi] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    setIsLoadingApi(true);
+    fetch(`/api/mock-slots?specialty=${encodeURIComponent(specialty)}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data?.slots) {
+          setSlots(data.slots);
+        }
+      })
+      .catch(() => {
+        // Fallback to local mock slots if offline
+      })
+      .finally(() => {
+        if (isMounted) setIsLoadingApi(false);
+      });
+    return () => {
+      isMounted = false;
+    };
+  }, [specialty]);
 
   const handleBook = () => {
     if (selectedSlot) {
@@ -62,22 +85,27 @@ export default function SlotsPage() {
       <div className="max-w-md mx-auto px-4 py-6">
         <div className="mb-6">
           <h2 className="text-xl font-semibold mb-2">Chuyên khoa {specialty}</h2>
-          <p className="text-[#94A3B8] text-sm">
-            Thứ Hai, 20/10/2026 · Vinmec Times City
+          <p className="text-[#94A3B8] text-sm flex items-center gap-2">
+            <span>Thứ Hai, 20/10/2026 · Vinmec Times City</span>
+            {isLoadingApi && (
+              <span className="text-xs text-[#14B8A6] animate-pulse">
+                (Đang truy vấn mock HIS API...)
+              </span>
+            )}
           </p>
         </div>
 
-        <div className="mb-6 p-4 bg-[#1E293B] rounded-lg border border-[#334155]">
-          <div className="flex items-start gap-2">
-            <span className="text-[#14B8A6] text-lg">✓</span>
-            <p className="text-sm text-[#94A3B8] leading-relaxed">
-              <strong className="text-[#F8FAFC]">Slot đã được hard-lock:</strong> Khi bạn chọn,
-              lịch sẽ được xác nhận tức thì. Không cần chờ tổng đài gọi lại.
-            </p>
+        <div className="mb-6 p-4 bg-amber-500/10 rounded-lg border border-amber-500/30">
+          <div className="flex items-start gap-2.5">
+            <span className="text-amber-400 text-base mt-0.5">⚠️</span>
+            <div className="text-xs text-amber-200/90 leading-relaxed">
+              <strong className="text-amber-300 block mb-1">Cơ chế Hard-lock Slot (Giả định thiết kế):</strong>
+              Demo minh họa ý tưởng giữ chỗ tạm thời và đồng bộ tức thì. Trong thực tế, hệ thống y tế cần tích hợp API trực tiếp với HIS và bắt buộc có luồng xử lý edge case khi bác sĩ bận đột xuất (cấp cứu/hội chẩn), khác với ghế cố định rạp chiếu phim.
+            </div>
           </div>
         </div>
 
-        <div className="space-y-3 mb-24">
+        <div className="space-y-3 mb-28">
           {slots.map((slot) => (
             <button
               key={slot.id}
@@ -97,13 +125,13 @@ export default function SlotsPage() {
                   <p className="text-sm text-[#94A3B8]">{slot.time}</p>
                 </div>
                 {slot.available > 0 ? (
-                  <span className="inline-flex items-center gap-1 px-2 py-1 bg-[#14B8A6]/20 text-[#14B8A6] text-xs font-medium rounded">
-                    <span className="w-1.5 h-1.5 bg-[#14B8A6] rounded-full animate-pulse" />
-                    Còn {slot.available} chỗ
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-medium rounded">
+                    <span className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse" />
+                    Demo: {slot.available} slot khả dụng (mock)
                   </span>
                 ) : (
-                  <span className="inline-flex items-center px-2 py-1 bg-[#334155] text-[#64748B] text-xs font-medium rounded">
-                    Hết chỗ
+                  <span className="inline-flex items-center px-2.5 py-1 bg-[#334155] text-[#94A3B8] text-xs font-medium rounded">
+                    Hết chỗ (mock)
                   </span>
                 )}
               </div>
@@ -113,15 +141,37 @@ export default function SlotsPage() {
       </div>
 
       {selectedSlot && (
-        <div className="fixed bottom-0 left-0 right-0 bg-[#1E293B] border-t border-[#334155] px-4 py-4">
-          <button
-            onClick={handleBook}
-            className="w-full max-w-md mx-auto block bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold px-6 py-4 rounded-lg transition-colors"
-          >
-            Xác nhận đặt lịch ngay
-          </button>
+        <div className="fixed bottom-0 left-0 right-0 bg-[#1E293B] border-t border-[#334155] px-4 py-4 z-20 shadow-xl">
+          <div className="max-w-md mx-auto space-y-3">
+            <div className="p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg flex items-start gap-2">
+              <span className="text-amber-400 text-sm mt-0.5">⚠️</span>
+              <p className="text-xs text-amber-200/90 leading-relaxed">
+                <strong>Lưu ý:</strong> Đây là demo. Trong hệ thống thật, slot sẽ được xác nhận sau khi kiểm tra lịch làm việc thực tế của bác sĩ (phòng ngừa tình huống bác sĩ bận cấp cứu/hội chẩn đột xuất).
+              </p>
+            </div>
+            <button
+              onClick={handleBook}
+              className="w-full block bg-[#F97316] hover:bg-[#EA580C] text-white font-semibold px-6 py-3.5 rounded-lg transition-colors text-center"
+            >
+              Xác nhận đặt lịch ngay (Demo)
+            </button>
+          </div>
         </div>
       )}
     </div>
+  );
+}
+
+export default function SlotsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#0F172A] text-[#F8FAFC] flex items-center justify-center">
+          <p className="text-[#94A3B8]">Đang tải danh sách lịch khám...</p>
+        </div>
+      }
+    >
+      <SlotsContent />
+    </Suspense>
   );
 }
